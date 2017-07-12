@@ -37,7 +37,7 @@ Gerekli aşamaları uyguladıktan sonra devremizi gerçeklemek için xdc dosyas�
 image::https://github.com/ahmeterdem9603/fpga/blob/master/inputs.PNG[R]
 image::https://github.com/ahmeterdem9603/fpga/blob/master/outputs.PNG[R]
 
-Bu işlemleri yaptıktan sonra daha önce belirttiğimiz adımları uygulayarak programı kart üzerine yükleyiniz.+
+Bu işlemleri yaptıktan sonra daha önce belirttiğimiz adımları uygulayarak programı kart üzerine yükleyiniz. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/kart_1.jpg[R]
 image::https://github.com/ahmeterdem9603/fpga/blob/master/kart_2.jpg[R]
