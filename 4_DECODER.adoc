@@ -20,7 +20,7 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/do%C4%9Fruluk_tablosu.
 
 == VERİLOG DECODER KODU +
 
-Bu dökümanda üç girişli decoder devresi oluşturulmuştur. Dolayısıyla, üç giriş ve sekiz çıkış tanımlıyoruz. +
+Bu dökümanda üç girişli decoder devresi tasarlayacağız. Dolayısıyla, üç giriş ve sekiz çıkış tanımlıyoruz. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/KOD.PNG[R]
 
