@@ -1,13 +1,13 @@
 image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/GER%C3%87EKLEME/kapak_1.jfif[R]
 
-=VERİLOG HALF ADDER +
+= VERİLOG HALF ADDER +
 *(ZYBO ZYNQ-7000 kartı kullanılmıştır.)* +
 
 -Proje Sentezi ve Gerçekleme Aşamaları +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/GER%C3%87EKLEME/25.PNG[R]
 
-==PROJE SENTEZİ VE GERÇEKLEME AŞAMALARI + 
+== PROJE SENTEZİ VE GERÇEKLEME AŞAMALARI + 
 Kart üzerinde kullanacağınız çevreselleri aktifleştirmek için *.xdc* uzantılı dosyaya ihtiyacınız vardır. *ZYBO ZYNQ-7000* 
 kartının xdc dosyasını dökümanın içinde bulunduğu klasörde bulabilirsiniz. Eğer kullanacağınız kart farklı ise xdc dosyasını 
 internetten bulabilirsiniz. +
@@ -32,7 +32,7 @@ Eklemiş olduğunuz xdc dosyasını paneldeki *"Source"* bölümünden açınız
 image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/GER%C3%87EKLEME/5.PNG[R]
 
 Tasarımınızın kod kısmında kullanmış olduğunuz giriş ve çıkışları bu dosyada aktif ediniz. 
-*(Satırın başındaki *"#"* işaretini kaldırınız.)* Kod içerisinde kullandığınız giriş ve çıkışların isimlerinin
+*(Satırın başındaki "#" işaretini kaldırınız.)* Kod içerisinde kullandığınız giriş ve çıkışların isimlerinin
 bu dosyadakilerle aynı olmasına dikkat ediniz. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/GER%C3%87EKLEME/6.PNG[R]
@@ -46,7 +46,7 @@ Sentez tamamlandıktan sonra uygulamayı çalıştırmak için *"Run Implementat
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/GER%C3%87EKLEME/8.PNG[R]
 
-Daha sonra sol paneldeki *"Generate Bitstream" bölümüne tıklayınız. +
+Daha sonra sol paneldeki *"Generate Bitstream"* bölümüne tıklayınız. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/GER%C3%87EKLEME/DFVGB.PNG[R]
 
