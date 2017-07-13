@@ -1,1 +1,119 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/kapak_1.jfif[R]
+
+= VERİLOG HALF ADDER TASARIMI +
+*(ZYBO ZYNQ-7000 kartı kullanılmıştır.)* +
+
+- Proje Dosyası Oluşturma +
+- Simülasyon Modunda Uygulama +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/25.PNG[R]
+
+== PROJE DOSYASI OLUŞTURMA +
+
+*“Create new project”*'e tıklayarak yeni proje dosyası oluşturmaya başlıyoruz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/1.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/2.PNG[R]
+
+Proje ismini seçiniz ve proje dosyasının kaydedileceği yeri seçiniz.
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/3.PNG[R]
+
+*"RTL Project"* i seçerek *"Next"* e tıklayınız. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/4.PNG[R]
+
+Bizim kullanacağımız kart resimde gösterilen *“ZYBO ZYNQ-7000”* olduğu için ayarları bu şekilde yaptık sizde kullanacağınız karta göre gerekli ayarları yapınız ve *“Next”* e basınız. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/26.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/5.PNG[R]
+
+*"Finish"* e tıklayarak proje dosyasını oluşturunuz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/6.PNG[R]
+
+*“Add Sources”* a tıklayarak oluşturulan projeye gerekli dosyaları ekleyiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/7.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/8.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/9.PNG[R]
+
+Oluşturacağınız kaynak dosyasının tipini ve ismini tanımlayarak bir sonraki sayfaya geçiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/10.PNG[R]
+
+Oluşturmak istediğiniz tasarım tam olarak belli değil ise input ve outputları daha sonra tanımlayabilirsiniz. Bu dökümanda input ve outputlar daha sonra tanımlanacaktır. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/11.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/12.PNG[R]
+
+== SİMÜLASYON MODUNDA UYGULAMA +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/23_LI.jpg[R]
+
+Bu dökümanda *yapısal (structural)* tarzda basit bir half adder kodu yazacağız. 
+Half adder'in blok şeması şekilde gösterilmiştir. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/13.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/14.PNG[R]
+
+*Yazdığınız kodu kaydetmeyi unutmayınız !* +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/15.png[R]
+
+Oluşturduğumuz devrenin blok şemasını görebilmek için sol paneldeki *"RTL Analysis"* bölümünü kullanabilirsiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/16.PNG[R]
+
+Eğer *veri akışı (dataflow)* tarzında bir half adder tasarlamak isterseniz, şu şekilde bir verilog kodu yazabilirsiniz; +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/DATAFLOW.PNG[R]
+
+Tasarladığınız devrenin blok şemasını görebilmek için *"RTL Analysis"* bölümünü kullanabilirsiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/DATAFLOW-1.PNG[R]
+
+Aynı tasarımın *davranışsal (behavioral)* tarzındaki verilog kodu şu şekildedir; +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/Behavioral.PNG[R]
+
+Daha önce belirttiğimiz işlemleri uygulayarak deevrenin blok şemasını inceleyebilirsiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/Behavioral-1.PNG[R]
+
+Simülasyon özelliğini kullanmak için sol paneldeki *"Run Simulation"* a tıklıyoruz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/33.PNG[R]
+
+Ekranda gördüğünüz mavi ve kırmızı işaretleri temizlemek için üst panelde işaretlenen yere tıklayınız. Daha sonra giriş değişkenlerinize değer vermek için değişkenlerinizin üzerine sağ tıklayarak istediğiniz değerleri verebilirsiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/17.PNG[R]
+
+*"Force Clock"* kısmından değişkenlerinize vereceğiniz değerlerin özelliklerini ayarlayabilirsiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/18.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/19.PNG[R]
+
+Yaptığınız değişken değerlendirmelerini kaydetmek için şekilde belirtilen *"Save"* ikonuna basınız. +
+Daha sonra üst paneldeki işaretli ikona basınız. Bu ikonun özelliği, her basmada değişkenlerdeki değişimleri periyodik olarak göstermesidir. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/20.PNG[R]
+
+Alttaki resimde belirtilen ikon simülasyondaki değişimleri daha iyi gözlemlemek için bir periyotluk bölümü ekrana yansıtır. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/21.PNG[R]
+
+Bu adımları takip ettikten sonra simülasyon kısmında devrenizin nasıl çalıştığını daha rahat gözlemleyebilirsiniz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/22.PNG[R]
+
+
+
+
+
+
+
+
+
+
 
