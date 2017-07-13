@@ -1,10 +1,10 @@
-image::https://github.com/ahmeterdem9603/fpga/blob/master/kapak_1.jfif[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/kapak_1.jfif[R]
 =         VERİLOG DECODER (KOD ÇÖZÜCÜ) TASARIMI +
 
 (ZedBoard Zynq Evaluation and Development Kiti kullanılmıştır.) 
 
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/kapak_2.jpg[R] 
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/kapak_2.jpg[R] 
 
 == DECODER (KOD ÇÖZÜCÜ) +
 
@@ -12,36 +12,36 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/kapak_2.jpg[R]
 
 === ÜÇ GİRİŞLİ DECODER +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/decoder_blok.gif[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/decoder_blok.gif[R]
 
 * Doğruluk Tablosu (Truth Table) +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/do%C4%9Fruluk_tablosu.jpg[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/doğruluk_tablosu.jpg[R]
 
 == VERİLOG DECODER KODU +
 
 Bu dökümanda üç girişli decoder devresi tasarlayacağız. Dolayısıyla, üç giriş ve sekiz çıkış tanımlıyoruz. +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/KOD.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/KOD.PNG[R]
 
 Vivado programında yazmış olduğumuz kodun blok devresini görebilirsiniz. +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/blok%20diagram.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/blok%20diagram.PNG[R]
 
 Tasarlamış olduğumuz devrenin doğruluğunu test etmek için simülasyon modunu kullanıyoruz. +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/sim%C3%BClasyon.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/sim%C3%BClasyon.PNG[R]
 
 Gerekli aşamaları uyguladıktan sonra devremizi gerçeklemek için xdc dosyasında giriş ve çıkışları aktif ediyoruz. +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/inputs.PNG[R]
-image::https://github.com/ahmeterdem9603/fpga/blob/master/outputs.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/inputs.PNG[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/outputs.PNG[R]
 
 Bu işlemleri yaptıktan sonra daha önce belirttiğimiz adımları uygulayarak programı kart üzerine yükleyiniz. +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/kart_1.jpg[R]
-image::https://github.com/ahmeterdem9603/fpga/blob/master/kart_2.jpg[R]
-image::https://github.com/ahmeterdem9603/fpga/blob/master/kart_3.jpg[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/kart_1.jpg[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/kart_2.jpg[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/kart_3.jpg[R]
 
 
 
