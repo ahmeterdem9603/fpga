@@ -24,7 +24,7 @@ Bu dökümanda üç girişli decoder devresi tasarlayacağız. Dolayısıyla, ü
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/KOD.PNG[R]
 
-Vivado programında yazmış olduğumuz kodun blok devresini görebilirsiniz. +
+Vivado programında yazmış olduğumuz kodun blok şemasını görebilirsiniz. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/4_DECODER/blok%20diagram.PNG[R]
 
