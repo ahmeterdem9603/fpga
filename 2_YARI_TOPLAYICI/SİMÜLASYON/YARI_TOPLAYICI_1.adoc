@@ -67,7 +67,23 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%
 
 Eğer *veri akışı (dataflow)* tarzında bir half adder tasarlamak isterseniz, şu şekilde bir verilog kodu yazabilirsiniz; +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/DATAFLOW.PNG[R]
+[source,verilog]
+--------------------------------
+
+// DATAFLOW STYLE HALF ADDER
+
+module yari_toplayici(A,B,S,C);
+	
+	output S,C;
+	input  A,B;
+
+
+assign	S= A ^ B;
+assign	C= A & B;
+
+endmodule
+
+--------------------------------
 
 Tasarladığınız devrenin blok şemasını görebilmek için *"RTL Analysis"* bölümünü kullanabilirsiniz. +
 
@@ -75,7 +91,19 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%
 
 Aynı tasarımın *davranışsal (behavioral)* tarzındaki verilog kodu şu şekildedir; +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/2_YARI_TOPLAYICI/S%C4%B0M%C3%9CLASYON/Behavioral.PNG[R]
+[source,verilog]
+--------------------------------
+
+// BEHAVIORAL STYLE HALF ADDER
+
+module yari_toplayici(A,B,S,C);
+	
+	output S,C;
+	input  A,B;
+
+assign	{C,S} = A + B;
+
+endmodule
 
 Daha önce belirttiğimiz işlemleri uygulayarak deevrenin blok şemasını inceleyebilirsiniz. +
 
