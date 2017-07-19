@@ -104,6 +104,7 @@ module yari_toplayici(A,B,S,C);
 assign	{C,S} = A + B;
 
 endmodule
+--------------------------------
 
 Daha önce belirttiğimiz işlemleri uygulayarak deevrenin blok şemasını inceleyebilirsiniz. +
 
