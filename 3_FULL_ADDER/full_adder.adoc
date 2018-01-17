@@ -5,3 +5,46 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/3_FULL_ADDER/kapak_1.j
 image::https://github.com/ahmeterdem9603/fpga/blob/master/3_FULL_ADDER/tech-industrial-electronic-background-texture-8731327.jpg[R]
 
 == 2 BİT FULL ADDER +
+İki bitlik iki sayıyı ve bir önceki işlemden gelen elde bitini (carry input) dikkate alarak toplama işlemini gerçekleştiren devredir. Çıkış olarak iki bitlik bir sayı ve varsa taşma bitini (carry output) görebiliriz. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/3_FULL_ADDER/full_adder.png[R]
+
+== VERİLOG KODU +
+İki bitlik bir full adder tasarımı için bir bitlik iki adet full adder modülü kullanılabilir. Verilog kodunda bu şekilde bir tasarım amaçlanmıştır. Kod dataflow olarak yazılmıştır. Daha büyük tasarımlarda kolaylık sağlaması için behavioral yazım tarzı da kullanılmalıdır. +
+
+[source,verilog]
+--------------------------------------------------
+
+module saytas (sayi1,sayi2,elde,toplam,carry);
+    input  [1:0] sayi1,sayi2;
+    input        elde;
+    output [1:0] toplam;
+    output       carry;
+    wire         cout1;
+     
+    FA bit1_FA (sayi1[0], sayi2[0], elde, toplam[0], cout1);
+    FA bit2_FA (sayi1[1], sayi2[1], cout1, toplam[1], carry);
+endmodule
+
+// 1-bit full adder module
+module FA (a, b, cin, s, cout);
+    input  a, b, cin;
+    output s, cout;
+    
+    assign s = (~a & ~b & cin) | (~a & b & ~cin) | (a & ~b & ~cin) | (a & b & cin);
+    assign cout = (~a & b & cin) | (a & ~b & cin) | (a & b & ~cin) | (a & b & cin);
+endmodule
+
+--------------------------------------------------
+
+== Blok Şeması +
+Yapmış olduğumuz tasarımın blok şeması şu şekildedir: +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/3_FULL_ADDER/block.PNG[R]
+
+== Simülasyon Sonuçları
+Yapılan tasarım carry input(elde) değeri ve sayılar değiştirilerek test edilmiştir. Sonuçlar şu şekildedir: +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/3_FULL_ADDER/timing%20diag.PNG[R]
+
+
