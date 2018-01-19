@@ -1,0 +1,65 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= Memory MODÜLÜ +
+
+Counter modülünün çıkışındaki 5 bitlik veri, bu modüldeki adresleri kodlayacağı için 32 (2^5) bölmeli bir hafıza gereklidir.
+Hafızadaki veriler değişmeyeceğinden dolayı modül ROM olarak da adlandırılabilir. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module Memory (clock, addr, data);
+        input  logic       clock;
+        //input  logic       en;
+        input  logic [4:0] addr;
+        output logic [8:0] data;
+        
+    always_ff @(posedge clock) 
+        begin
+           //if (en)
+              case(addr)
+                 5'b00000: data <= 9'b001000000;
+                 5'b00001: data <= 9'b001011011;
+                 5'b00010: data <= 9'b100110110;
+                 5'b00011: data <= 9'b101010010;
+                 5'b00100: data <= 9'b110100100;
+                 5'b00101: data <= 9'b000011011;
+                 5'b00110: data <= 9'b010001100;
+                 5'b00111: data <= 9'b100100100;
+                 5'b01000: data <= 9'b100010010;
+                 5'b01001: data <= 9'b100110011;
+                 5'b01010: data <= 9'b011001110;
+                 5'b01011: data <= 9'b010010010;
+                 5'b01100: data <= 9'b000100100;
+                 5'b01101: data <= 9'b001001010;
+                 5'b01110: data <= 9'b010001100;
+                 5'b01111: data <= 9'b010010101;
+                 5'b10000: data <= 9'b001010010;
+                 5'b10001: data <= 9'b111011010;
+                 5'b10010: data <= 9'b010001010;
+                 5'b10011: data <= 9'b001001010;
+                 5'b10100: data <= 9'b100010011;
+                 5'b10101: data <= 9'b010010010;
+                 5'b10110: data <= 9'b001001010;
+                 5'b10111: data <= 9'b100101110;
+                 5'b11000: data <= 9'b001001010;
+                 5'b11001: data <= 9'b110000100;
+                 5'b11010: data <= 9'b010010011;
+                 5'b11011: data <= 9'b010101010;
+                 5'b11100: data <= 9'b010010011;
+                 5'b11101: data <= 9'b101001010;
+                 5'b11110: data <= 9'b001000010;
+                 5'b11111: data <= 9'b101001110;
+                 default : data <= 9'bXXXXXXXXX;                            
+            endcase
+        end
+endmodule
+
+--------------------------------------------------
+
+== Modülün Blok Şeması +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/memory.PNG[R]
+
