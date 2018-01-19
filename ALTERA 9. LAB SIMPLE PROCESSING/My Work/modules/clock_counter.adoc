@@ -6,7 +6,7 @@ Bu modül simülasyon sonuçlarını elde etmek için gerekli ve uygun değildir
 için clock işaretini bölmemiz gerekir. Bu uygulamada kullanmış olduğumuz ZedBoard Zynq Evaluation and Development kiti 50 MHz clock 
 işaret üretebilme yeteneğine sahip olduğu için uygulamadaki çıkış verilerinin değişimini görebilmemiz için çalışma frekansını düşürmemiz gerekmektedir. +
 
-== Modül'ün SystemVerilog Kodu +
+== Modülün SystemVerilog Kodu +
 
 [source,verilog]
 --------------------------------------------------
