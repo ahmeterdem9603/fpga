@@ -1,0 +1,5 @@
+= clock_Counter Modülü +
+
+Bu modül simülasyon sonuçlarını elde etmek için gerekli ve uygun değildir. Ancak bu uygulamayı kart üzerinde görebilmek 
+için clock işaretini bölmemiz gerekir. Bu uygulamada kullanmış olduğumuz ZedBoard Zynq Evaluation and Development kiti 50 MHz clock 
+işaret üretebilme yeteneğine sahip olduğu için  
