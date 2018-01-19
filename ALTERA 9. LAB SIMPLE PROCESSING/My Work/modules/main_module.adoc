@@ -1,0 +1,33 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= ANA MODÜL +
+
+== Modül'ün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module lab9_dnm (clock, Resetn, Run, Done, Bus);  //MClock, PClock
+    
+    input logic        clock, Resetn, Run;       // MClock, PClock
+    output logic       Done;
+    output logic [8:0] Bus;
+    logic        [4:0] count_addr;        
+    logic        [8:0] data_Din;
+    //logic              out_clock;
+         
+        //clock_Counter Real_clk (clock, Resetn, out_clock);   
+        Counter       Clk      (clock, Resetn, count_addr);                 // out_clock
+        Memory        Mem      (clock, count_addr, data_Din);               // out_clock
+        Processor     Proc     (clock, Resetn, data_Din, Run, Done, Bus);   // out_clock
+        
+endmodule
+
+--------------------------------------------------
+
+Kod üzerinde yorum satırı durumundaki yerler kart üzerinde gerçekleme yapmak için kullanılmalıdır. Simülasyon için 
+kullanılmasına gerek yoktur. +
+
+== Modül'ün Blok Şeması +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/mainblock.PNG[R]
