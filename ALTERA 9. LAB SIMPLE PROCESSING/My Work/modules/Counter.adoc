@@ -5,7 +5,7 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SI
 5 bitlik veriyi birer arttırarak çıkışa veren sayaç modülüdür. Bu 5 bitlik veri daha sonra 32 bölmeli bir hafızanın adreslerini 
 belirtecektir. +
 
-== Modül'ün SystemVerilog Kodu +
+== Modülün SystemVerilog Kodu +
 
 [source,verilog]
 --------------------------------------------------
@@ -27,7 +27,7 @@ endmodule
 
 --------------------------------------------------
 
-== Modül'ün Blok Şeması +
+== Modülün Blok Şeması +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/clk.PNG[R]
 
