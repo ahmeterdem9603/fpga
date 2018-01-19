@@ -31,7 +31,6 @@ module clock_Counter(clk, reset, result);
         end
 endmodule
 
-
 module Counter(clk, reset, result);
 
     input  logic       clk;
