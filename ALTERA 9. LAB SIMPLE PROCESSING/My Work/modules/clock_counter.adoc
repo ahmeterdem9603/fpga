@@ -1,5 +1,50 @@
-= clock_Counter Modülü +
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= clock_Counter MODÜLÜ +
 
 Bu modül simülasyon sonuçlarını elde etmek için gerekli ve uygun değildir. Ancak bu uygulamayı kart üzerinde görebilmek 
 için clock işaretini bölmemiz gerekir. Bu uygulamada kullanmış olduğumuz ZedBoard Zynq Evaluation and Development kiti 50 MHz clock 
-işaret üretebilme yeteneğine sahip olduğu için  
+işaret üretebilme yeteneğine sahip olduğu için uygulamadaki çıkış verilerinin değişimini görebilmemiz için çalışma frekansını düşürmemiz gerekmektedir. +
+
+== SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module clock_Counter(clk, reset, result);
+
+    input  logic            clk;
+    input  logic            reset;
+    output logic            result;
+           logic [29:0]     count;
+           
+    always_ff @(posedge clk) //or posedge reset)
+        begin
+            if (reset) 
+                result <= 1'b0;
+            else
+                count <= count + 1;
+                if (count <= 536870912)
+                    result <= 1'b1;
+                else
+                    result <= 1'b0;   
+        end
+endmodule
+
+
+module Counter(clk, reset, result);
+
+    input  logic       clk;
+    input  logic       reset;
+    output logic [4:0] result;
+
+    always_ff @(posedge clk or posedge reset)
+        begin
+            if (reset) 
+                result <= 0;
+            else
+                result <= result + 1;
+        end
+endmodule    
+
+--------------------------------------------------
