@@ -1,3 +1,52 @@
 image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
 
 = Processor MODÜLÜ +
+
+Bu modül Altera dökümanında belirtilen fonksiyonları ve durum makinesini içeren modüldür. Ayrıntılı açıklama 'document' bölümünde
+verilecektir. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module Processor (clock, reset, Din, Run, Done, Bus);
+    input  logic  [8:0] Din;
+    input  logic        clock, reset, Run;
+    output logic        Done;
+    output logic  [8:0] Bus;
+           logic  [8:0] Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, IRout, add_sub_out, G_regout, Aout;       
+           logic        Dinout, Gout, IRin, Ain,
+                        AddSub_sel, Gin;
+           logic  [7:0] RXin, RYout;
+                  
+    reg_ R0(clock,RXin[0],Bus,Q0);
+    reg_ R1(clock,RXin[1],Bus,Q1);
+    reg_ R2(clock,RXin[2],Bus,Q2);
+    reg_ R3(clock,RXin[3],Bus,Q3);
+    reg_ R4(clock,RXin[4],Bus,Q4);
+    reg_ R5(clock,RXin[5],Bus,Q5);
+    reg_ R6(clock,RXin[6],Bus,Q6);
+    reg_ R7(clock,RXin[7],Bus,Q7);
+    
+    reg_ A(clock,Ain,Bus,Aout);
+    
+    add_sub ADD_SUB(Aout, Bus, AddSub_sel, add_sub_out);
+    
+    reg_ G(clock, Gin, add_sub_out, G_regout);
+    
+    mux MUX (Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, G_regout, Din, RYout, Gout, Dinout, Bus);
+    
+    reg_IR reg_ir(clock, IRin, Din, IRout);
+    
+    cont_unit CONT_UNIT(clock, reset, Run, RYout, Gout, Dinout, IRin, IRout, RXin, Ain, AddSub_sel, Gin, Done);
+              
+endmodule 
+
+--------------------------------------------------
+
+== Modülün Blok Şeması +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/processor.PNG[R]
+
+
