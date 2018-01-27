@@ -1,0 +1,47 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= reg_ MODÜLÜ +
+
+Altera 9. lab föyünde belirtildiği üzere 9 bitlik yazmaçlar (register) tasarlanmıştır. Yazmaçlar clock işaretinin yükselen 
+kenarında (posedge clock) giriş verisini çıkışa aktarır. Diğer durumda çıkış verisinde herhangi bir değişim söz konusu olmaz. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module reg_ (clock, Rin, R, Q);
+    parameter     N = 9;
+    input  logic  [N-1:0] R;
+    input  logic  clock,Rin ;
+    output logic  [N-1:0] Q ;
+
+    always@(posedge clock)
+        if (Rin)
+            Q <= R ;       
+endmodule
+
+--------------------------------------------------
+
+= reg_IR MODÜLÜ +
+
+Tasarım olarak hiçbir farklılığa sahip olmamasına karşın, işlemcide üstlendiği farklı görevden dolayı diğer yazmaçlardan ayrı olarak 
+tanımlanmıştır. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+-------------------------------------------------
+
+module reg_IR (clock, Rin, R, Q);
+    parameter     N = 9;
+    input  logic  [N-1:0] R;
+    input  logic  clock,Rin ;
+    output logic  [N-1:0] Q ;
+
+    always_ff @(posedge clock)
+        if (Rin)
+            Q <= R ;       
+endmodule
+
+-------------------------------------------------

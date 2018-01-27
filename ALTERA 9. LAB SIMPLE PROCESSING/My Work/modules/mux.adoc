@@ -1,0 +1,47 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= mux MODÜLÜ +
+
+Altera dökümanında belirtilen işlem koşullarına göre mux modülü kodlanmıştır. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module mux (R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out, G_regout, Din, RYout, Gout, Dinout, Bus);
+
+    input  logic [8:0] R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out, G_regout, Din;
+    input  logic       Gout, Dinout;
+    input  logic [7:0] RYout;
+    output logic [8:0] Bus;
+
+    always_comb //(Rout or Gout or Dinout or R0out or R1out or R2out or R3out or R4out or R5out or R6out or R7out)
+        begin
+            case (RYout)
+
+                8'b10000000: Bus = R0out;
+                8'b01000000: Bus = R1out;
+                8'b00100000: Bus = R2out;
+                8'b00010000: Bus = R3out;
+                8'b00001000: Bus = R4out;
+                8'b00000100: Bus = R5out;
+                8'b00000010: Bus = R6out;
+                8'b00000001: Bus = R7out;
+      
+            endcase
+    
+            if (Gout)
+                Bus = G_regout;
+            if (Dinout)
+                Bus = Din;
+        end
+endmodule
+
+--------------------------------------------------
+
+== Modülün Blok Şeması +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/part2processor.PNG[R]
+
+

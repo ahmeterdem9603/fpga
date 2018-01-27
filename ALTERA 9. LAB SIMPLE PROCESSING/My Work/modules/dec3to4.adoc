@@ -1,0 +1,35 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= dec3to4 MODÜLÜ +
+
+dec3to8 modülünde bahsedilen 9 bitlik giriş verisinin en değerlikli ilk 3 bitini kullanarak cont_unit modülünün yapması 
+gereken 4 adet işlemsel fonksiyondan birini aktif ederek fonksiyonel tanımlamaları oluşturur. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module dec3to4(dec_in, Ix_en, dec_out);
+    input  logic [2:0] dec_in;
+    input  logic       Ix_en;
+    output logic [3:0] dec_out;
+    
+        always_comb 
+            begin
+                if (Ix_en)
+                    case (dec_in)       //I0-I1-I2-I3
+                        3'b000: dec_out = 4'b1000;
+                        3'b001: dec_out = 4'b0100;
+                        3'b010: dec_out = 4'b0010;
+                        3'b100: dec_out = 4'b0001;
+                        3'b011: dec_out = 4'b1000;                     
+                        3'b101: dec_out = 4'b1000;
+                        3'b110: dec_out = 4'b1000;
+                        3'b111: dec_out = 4'b1000;
+                       default: dec_out = 4'b1000;
+                   endcase                 
+           end
+endmodule
+
+--------------------------------------------------
