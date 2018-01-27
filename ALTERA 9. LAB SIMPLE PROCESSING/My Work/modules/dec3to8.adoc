@@ -1,0 +1,41 @@
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak.jpg[R]
+
+= dec3to8 MODÜLÜ +
+
+Bu modül işlemcide iki bölümde kullanılmak için tasarlanmıştır. İlk olarak, 9 bitlik giriş verisi üçer bit halinde 
+işlenir (XXXYYYZZZ). Burada en değerlikli ilk 3 bit (XXX) dec3to4 modülü tarafından işlenecektir. İkinci en değerlikli 3 bit (YYY)
+8 adet yazmaçın hangisinin aktif edilmesi gerektiğine karar verir. En değerliksiz 3 bit (ZZZ) ise mux modülünün girişindeki yazmaç
+çıkışlarının hangisinin aktif olamsı gerektiğine karar verir. +
+
+== Modülün SystemVerilog Kodu +
+
+[source,verilog]
+--------------------------------------------------
+
+module dec3to8(dec_in, En, dec_out);
+    input  logic [2:0] dec_in;
+    input  logic       En;
+    output logic [7:0] dec_out;
+    
+        always_comb 
+            begin
+                if (En)
+                    case (dec_in)
+                        3'b000: dec_out = 8'b10000000;
+                        3'b001: dec_out = 8'b01000000;
+                        3'b010: dec_out = 8'b00100000;
+                        3'b011: dec_out = 8'b00010000;
+                        3'b100: dec_out = 8'b00001000;
+                        3'b101: dec_out = 8'b00000100;
+                        3'b110: dec_out = 8'b00000010;
+                        3'b111: dec_out = 8'b00000001;
+                       default: dec_out = 8'b00000000;
+                    endcase                 
+           end
+endmodule
+
+--------------------------------------------------
+
+Yazılan kod parçasının tek başına bir anlamı olmamaktadır. Yine dosyanın içindeki 'Document' kısmında modüllerin tamamı bulunmaktadır.
+Oradan modülün bağlı olduğu giriş ve çıkışlara bakarak yapılan tasarım daha kolay anlaşılabilir. +
+
