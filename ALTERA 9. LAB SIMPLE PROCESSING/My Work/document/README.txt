@@ -1,1 +1,1 @@
-beğendin mi :)
+yeter bu kadar :D
