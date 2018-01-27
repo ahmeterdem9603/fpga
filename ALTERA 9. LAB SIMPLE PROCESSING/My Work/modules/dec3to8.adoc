@@ -36,6 +36,6 @@ endmodule
 
 --------------------------------------------------
 
-Yazılan kod parçasının tek başına bir anlamı olmamaktadır. Yine dosyanın içindeki 'Document' kısmında modüllerin tamamı bulunmaktadır.
+Yazılan kod parçasının tek başına bir anlamı olmamaktadır. Yine dosyanın içindeki 'document' kısmında modüllerin tamamı bulunmaktadır.
 Oradan modülün bağlı olduğu giriş ve çıkışlara bakarak yapılan tasarım daha kolay anlaşılabilir. +
 
