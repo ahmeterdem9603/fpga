@@ -33,5 +33,403 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SI
 
 Altera deneyinde bu üç modül için farklı clock işareti istenmiştir. Bu durum simülasyonda gerçekleme konusunda sorun çıkarmasa da kart üzerinde gerçekleme yapılacağı zaman güç tüketimi konusunda sorun çıkarabilmektedir. Güç tüketiminin %80-85'inin clock üretmek için harcandığı bilinmektedir. +
 
+Tüm modüllerin açıklamaları ve yaptıkları işlemler 'modules' bölümünde işlenmiştir. Tasarımın tek parça halindeki SystemVerilog kodu şu şekildedir: +
+
+[source,verilog]
+--------------------------------------------------
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company:         Kocaeli University
+// Engineer:        Ahmet Haydar Erdem 
+// 
+// Create Date:     12/12/2017 05:49:36 PM
+// Design Name:     Simple Processor
+// Module Name:     lab_9
+//////////////////////////////////////////////////////////////////////////////////
+
+module lab9_dnm (clock, Resetn, Run, Done, Bus);  //MClock, PClock
+    
+    input logic        clock, Resetn, Run;       // MClock, PClock
+    output logic       Done;
+    output logic [8:0] Bus;
+    logic        [4:0] count_addr;        
+    logic        [8:0] data_Din;
+    //logic              out_clock;
+         
+        //clock_Counter Real_clk (clock, Resetn, out_clock);   
+        Counter       Clk      (clock, Resetn, count_addr);                 // out_clock
+        Memory        Mem      (clock, count_addr, data_Din);               // out_clock
+        Processor     Proc     (clock, Resetn, data_Din, Run, Done, Bus);   // out_clock
+        
+endmodule
+
+module clock_Counter(clk, reset, result);
+
+    input  logic            clk;
+    input  logic            reset;
+    output logic            result;
+           logic [29:0]     count;
+           
+    always_ff @(posedge clk) //or posedge reset)
+        begin
+            if (reset) 
+                result <= 1'b0;
+            else
+                count <= count + 1;
+                if (count <= 536870912)
+                    result <= 1'b1;
+                else
+                    result <= 1'b0;   
+        end
+endmodule
+
+
+module Counter(clk, reset, result);
+
+    input  logic       clk;
+    input  logic       reset;
+    output logic [4:0] result;
+
+    always_ff @(posedge clk or posedge reset)
+        begin
+            if (reset) 
+                result <= 0;
+            else
+                result <= result + 1;
+        end
+endmodule    
+
+
+module Memory (clock, addr, data);
+        input  logic       clock;
+        //input  logic       en;
+        input  logic [4:0] addr;
+        output logic [8:0] data;
+        
+    always_ff @(posedge clock) 
+        begin
+           //if (en)
+              case(addr)
+                 5'b00000: data <= 9'b001000000;
+                 5'b00001: data <= 9'b001011011;
+                 5'b00010: data <= 9'b100110110;
+                 5'b00011: data <= 9'b101010010;
+                 5'b00100: data <= 9'b110100100;
+                 5'b00101: data <= 9'b000011011;
+                 5'b00110: data <= 9'b010001100;
+                 5'b00111: data <= 9'b100100100;
+                 5'b01000: data <= 9'b100010010;
+                 5'b01001: data <= 9'b100110011;
+                 5'b01010: data <= 9'b011001110;
+                 5'b01011: data <= 9'b010010010;
+                 5'b01100: data <= 9'b000100100;
+                 5'b01101: data <= 9'b001001010;
+                 5'b01110: data <= 9'b010001100;
+                 5'b01111: data <= 9'b010010101;
+                 5'b10000: data <= 9'b001010010;
+                 5'b10001: data <= 9'b111011010;
+                 5'b10010: data <= 9'b010001010;
+                 5'b10011: data <= 9'b001001010;
+                 5'b10100: data <= 9'b100010011;
+                 5'b10101: data <= 9'b010010010;
+                 5'b10110: data <= 9'b001001010;
+                 5'b10111: data <= 9'b100101110;
+                 5'b11000: data <= 9'b001001010;
+                 5'b11001: data <= 9'b110000100;
+                 5'b11010: data <= 9'b010010011;
+                 5'b11011: data <= 9'b010101010;
+                 5'b11100: data <= 9'b010010011;
+                 5'b11101: data <= 9'b101001010;
+                 5'b11110: data <= 9'b001000010;
+                 5'b11111: data <= 9'b101001110;
+                 default : data <= 9'bXXXXXXXXX;                            
+            endcase
+        end
+endmodule
+
+
+module Processor (clock, reset, Din, Run, Done, Bus);
+    input  logic  [8:0] Din;
+    input  logic        clock, reset, Run;
+    output logic        Done;
+    output logic  [8:0] Bus;
+           logic  [8:0] Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, IRout, add_sub_out, G_regout, Aout;       
+           logic        Dinout, Gout, IRin, Ain,
+                        AddSub_sel, Gin;
+           logic  [7:0] RXin, RYout;
+                  
+    reg_ R0(clock,RXin[0],Bus,Q0);
+    reg_ R1(clock,RXin[1],Bus,Q1);
+    reg_ R2(clock,RXin[2],Bus,Q2);
+    reg_ R3(clock,RXin[3],Bus,Q3);
+    reg_ R4(clock,RXin[4],Bus,Q4);
+    reg_ R5(clock,RXin[5],Bus,Q5);
+    reg_ R6(clock,RXin[6],Bus,Q6);
+    reg_ R7(clock,RXin[7],Bus,Q7);
+    
+    reg_ A(clock,Ain,Bus,Aout);
+    
+    add_sub ADD_SUB(Aout, Bus, AddSub_sel, add_sub_out);
+    
+    reg_ G(clock, Gin, add_sub_out, G_regout);
+    
+    mux MUX (Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, G_regout, Din, RYout, Gout, Dinout, Bus);
+    
+    reg_IR reg_ir(clock, IRin, Din, IRout);
+    
+    cont_unit CONT_UNIT(clock, reset, Run, RYout, Gout, Dinout, IRin, IRout, RXin, Ain, AddSub_sel, Gin, Done);
+              
+endmodule 
+
+
+module reg_ (clock, Rin, R, Q);
+    parameter     N = 9;
+    input  logic  [N-1:0] R;
+    input  logic  clock,Rin ;
+    output logic  [N-1:0] Q ;
+
+    always@(posedge clock)
+        if (Rin)
+            Q <= R ;       
+endmodule
+
+
+module reg_IR (clock, Rin, R, Q);
+    parameter     N = 9;
+    input  logic  [N-1:0] R;
+    input  logic  clock,Rin ;
+    output logic  [N-1:0] Q ;
+
+    always_ff @(posedge clock)
+        if (Rin)
+            Q <= R ;       
+endmodule
+
+
+module add_sub(A, B, Sel, Result);
+    parameter     N = 9;
+    input  logic  [N-1:0] A, B;
+    input  logic  Sel;
+    output logic  [N-1:0] Result ;
+   
+    always_comb
+        begin
+            if (!Sel) Result = A + B;
+            if (Sel)  Result = A - B;   
+        end
+endmodule
+
+
+module dec3to8(dec_in, En, dec_out);
+    input  logic [2:0] dec_in;
+    input  logic       En;
+    output logic [7:0] dec_out;
+    
+        always_comb 
+            begin
+                if (En)
+                    case (dec_in)
+                        3'b000: dec_out = 8'b10000000;
+                        3'b001: dec_out = 8'b01000000;
+                        3'b010: dec_out = 8'b00100000;
+                        3'b011: dec_out = 8'b00010000;
+                        3'b100: dec_out = 8'b00001000;
+                        3'b101: dec_out = 8'b00000100;
+                        3'b110: dec_out = 8'b00000010;
+                        3'b111: dec_out = 8'b00000001;
+                       default: dec_out = 8'b00000000;
+                    endcase                 
+           end
+endmodule
+
+
+module dec3to4(dec_in, Ix_en, dec_out);
+    input  logic [2:0] dec_in;
+    input  logic       Ix_en;
+    output logic [3:0] dec_out;
+    
+        always_comb 
+            begin
+                if (Ix_en)
+                    case (dec_in)       //I0-I1-I2-I3
+                        3'b000: dec_out = 4'b1000;
+                        3'b001: dec_out = 4'b0100;
+                        3'b010: dec_out = 4'b0010;
+                        3'b100: dec_out = 4'b0001;
+                        3'b011: dec_out = 4'b1000;                     
+                        3'b101: dec_out = 4'b1000;
+                        3'b110: dec_out = 4'b1000;
+                        3'b111: dec_out = 4'b1000;
+                       default: dec_out = 4'b1000;
+                   endcase                 
+           end
+endmodule
+
+
+module cont_unit (clock, reset, Run, RYout, Gout, Dinout, IRin, IRout, RXin, Ain, AddSub_sel, Gin, Done);
+                                
+    input   logic       clock,reset,Run;
+    input   logic [8:0] IRout;
+    output  logic [7:0] RYout,RXin;   
+    output  logic       Done = 1'b0, IRin = 1'b0, Gout = 1'b0, Dinout = 1'b0, Gin = 1'b0, AddSub_sel = 1'b0, Ain = 1'b0;  
+            logic [1:0] state;
+            logic [3:0] I_func;                       
+            logic       RX_en = 1'b0, RY_en = 1'b0, IX_en = 1'b0;
+        parameter [1:0] T0= 2'b00,   T1= 2'b01,   T2= 2'b10,   T3= 2'b11;   
+        parameter [3:0] I0= 4'b1000, I1= 4'b0100, I2= 4'b0010, I3= 4'b0001; 
+            
+            dec3to8 DEC_RX     (IRout[2:0], RX_en, RXin);
+            dec3to8 DEC_RY     (IRout[5:3], RY_en, RYout);
+            dec3to4 DEC_func   (IRout[8:6], IX_en, I_func);
+            
+    always_ff @(posedge clock or posedge reset)
+        begin
+            if (reset)
+                state <= T0;
+            else
+                case (state)
+                    T0:
+                        if (!Run) state <= T0;
+                        else      state <= T1;
+                    T1:    
+                        if (!Run) state <= T1;
+                        else      state <= T2;
+                    T2:    
+                        if (!Run) state <= T2;
+                        else      state <= T3;                       
+                    T3:    
+                        if (!Run) state <= T3;
+                        else      state <= T0;                                                                                               
+                endcase
+        end
+        
+   always_comb 
+                begin
+                    IRin  = 1'b1;
+                    IX_en = 1'b1;          
+                              
+                            if (I_func == I0) 
+                            case (state)                   
+                                T0: begin                                                          
+                                    Done  = 1'b0;                                    
+                                    end
+                                    
+                                T1: begin                               
+                                    RX_en = 1'b1;
+                                    RY_en = 1'b1;
+                                    Done  = 1'b1;     
+                                    end
+                                T2: begin                                                                                                                                                                     
+                                    end
+                                T3: begin                                                                                                                                                                     
+                                    end
+                            default: state = T0;
+                            endcase
+                                    
+                            if (I_func == I1)
+                            case (state)
+                                T0: begin                                                          
+                                    Done  = 1'b0;                                    
+                                    end
+                                
+                                T1: begin
+                                    Dinout = 1'b1;            
+                                    RX_en  = 1'b1;
+                                    Done   = 1'b1;
+                                    end
+                                T2: begin                                                                                                                                                                     
+                                    end
+                                T3: begin                                                                                                                                                                     
+                                    end
+                            default: state = T0;        
+                            endcase
+                                   
+                            if (I_func == I2) 
+                            case (state)
+                                T0: begin                                    
+                                    Done  = 1'b0;
+                                    end
+                                    
+                                T1: begin                                  
+                                    RX_en = 1'b1;                           
+                                    Ain   = 1'b1;                                                       
+                                    end                                               
+                                          
+                                T2: begin                                                                                                                                         
+                                    RY_en = 1'b1;                                                                                                           
+                                    Gin   = 1'b1;                            
+                                    end
+                                                                                                                                                                         
+                                T3: begin
+                                    RX_en = 1'b1;                                                                                                           
+                                    Gout  = 1'b1;
+                                    Done  = 1'b1;                            
+                                    end
+                            default: state = T0;                                             
+                            endcase                                
+                            
+                            if (I_func == I3) 
+                            case (state)   
+                                T0: begin                                    
+                                    Done  = 1'b0;
+                                    end 
+                                                                                                                                                                                                                                                                               
+                                T1: begin                                  
+                                    RX_en = 1'b1;                           
+                                    Ain   = 1'b1;                                                       
+                                    end  
+                                     
+                                T2: begin
+                                    RY_en      = 1'b1;                                                                                                           
+                                    Gin        = 1'b1;    
+                                    AddSub_sel = 1'b1;
+                                    end                
+                                
+                                T3: begin                                                                                                          
+                                    RX_en = 1'b1;                                                                                                           
+                                    Gout  = 1'b1;
+                                    Done  = 1'b1;                            
+                                    end 
+                            default: state = T0;                                  
+                            endcase
+                end                                                                                                                   
+endmodule
+
+
+module mux (R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out, G_regout, Din, RYout, Gout, Dinout, Bus);
+
+    input  logic [8:0] R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out, G_regout, Din;
+    input  logic       Gout, Dinout;
+    input  logic [7:0] RYout;
+    output logic [8:0] Bus;
+
+    always_comb //(Rout or Gout or Dinout or R0out or R1out or R2out or R3out or R4out or R5out or R6out or R7out)
+        begin
+            case (RYout)
+
+                8'b10000000: Bus = R0out;
+                8'b01000000: Bus = R1out;
+                8'b00100000: Bus = R2out;
+                8'b00010000: Bus = R3out;
+                8'b00001000: Bus = R4out;
+                8'b00000100: Bus = R5out;
+                8'b00000010: Bus = R6out;
+                8'b00000001: Bus = R7out;
+      
+            endcase
+    
+            if (Gout)
+                Bus = G_regout;
+            if (Dinout)
+                Bus = Din;
+        end
+endmodule
+
+--------------------------------------------------
+
+Modüllerin blok şemaları 'modules' bölümünde verilmiştir. Kart üzerinde gerçekleme yapmak için .xdc uzantılı dosyadaki gerekli portların aktif edilmesi yeterlidir. Tasarımın simülasyonu ve ZYBO ZYNQ-7000 kartı üzerinde gerçeklemesi yapılmıştır. Fakat dökümantasyon çalışması eksik olduğundan dolayı çalışmaya eklenmemiştir. +
+      
+   
 
 
