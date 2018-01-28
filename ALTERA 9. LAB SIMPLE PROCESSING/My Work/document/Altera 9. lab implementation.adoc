@@ -1,6 +1,24 @@
 = Basit İşlemci Tasarımı +
 
-image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak6.jpg[R]
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/kapak6.jpg[R,right]
 
 *(Altera 9.LAB 'Simple Processing' tasarımı gerçeklenmiştir.)* +
+
+Figure 1’de 9-bit kaydedici, bilgi seçici, toplayıcı/çıkarıcı ve kontrol birimi (sonlu durum makinesi) bulunan sayısal bir sistem gösterilmiştir. 9 bit veri sisteme DIN girişinden girer. Bu veri bilgi seçici (mux) aracılığıyla yazmaçlara (registers) aktarılır.
+Bilgi seçici aynı zamanda bir yazmaç içerisindeki veriyi başka bir yazmaça kaydetmek için de kullanılmaktadır. Bilgi seçicinin
+çıkışı Bus olarak adlandırılmaktadır. Bus sistem içerisindeki bir veriyi bir yerden başka bir yere taşıyan birimin adıdır. 
+Toplama ve çıkarma işlemleri, bilgi seçici çıkışının A yazmacına kaydedildiği zaman aktif hale gelir. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/document/imgs/fig.1.PNG[R,right]
+
+Sistem kontrol birimi (control unit) sayesinde her bir saat döngüsünde farklı bir işlem yapabilir. Kontrol birimi gelen veriyi tanımlar ve hangi yazmaca kaydedileceğini belirler. Böyle sistemler genellikle işlemci olarak adlandırılır.Table 1’de bu çalışmada tanımlanan işlemcinin sahip olduğu komutların listesi verilmiştir. mv (move) komutu bir yazmaçtan diğerine verinin taşınması için kullanılmaktadır. mvi komutu ise D sabitini yazmaca taşımak için kullanılmaktadır. 
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/document/imgs/oprtns.PNG[R,right]
+
+Her komut IR yazmacına 9-bitlik IIIXXXYYY şeklinde kodlanarak kaydedilir. Burada en değerlikli ilk üç bit (III) kısmı komutun ne olduğunu, ikinci en değerlikli üç bit (XXX) kısmı RX kaydedicisinin hangisi olduğunu ve en değerliksiz üç bit (YYY) kısmı ise RY kaydedicisinin hangisi olduğunu işaret eder. +
+
+Komutlarda belirtilen işlemlerin gerçekleşmesi esnasında başka bir komutun atanması durumunda işlem önceliği söz konusudur. Kontrol birimindeki sonlu durum makinesi bir sonraki komuta geçmeden işlemdeki komutun tamamlanmasını sağlamak için saati kontrol etmektedir. İşlemci bir komutu işlerken Run sinyali verilir ve komut tamamlandığında ise Done sinyali verilerek komutun bittiği haber verilir. Table-2’de Table-1’deki komutların kontrol sinyalleri gösterilmiştir. Burada T0 anında IRin kontrol sinyali olmasına karşın tabloda T0 anı verilmemiştir. Dolayısıyla tasarım yaparken bunu da göz önünde bulundurmamız gerekir. +
+
+image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/document/imgs/oprtns2.PNG[R,right]
+
 
