@@ -18,20 +18,15 @@ image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SI
 
 Her komut IR yazmacına 9-bitlik IIIXXXYYY şeklinde kodlanarak kaydedilir. Burada en değerlikli ilk üç bit (III) kısmı komutun ne olduğunu, ikinci en değerlikli üç bit (XXX) kısmı RX kaydedicisinin hangisi olduğunu ve en değerliksiz üç bit (YYY) kısmı ise RY kaydedicisinin hangisi olduğunu işaret eder. +
 
-Komutlarda belirtilen işlemlerin gerçekleşmesi esnasında başka bir komutun atanması durumunda işlem önceliği söz konusudur. Kontrol birimindeki sonlu durum makinesi bir sonraki komuta geçmeden işlemdeki komutun tamamlanmasını sağlamak için saati kontrol etmektedir. İşlemci bir komutu işlerken Run sinyali verilir ve komut tamamlandığında ise Done sinyali verilerek komutun bittiği haber verilir. Table-2’de Table-1’deki komutların kontrol sinyalleri gösterilmiştir. Burada T0 anında IRin kontrol sinyali olmasına karşın tabloda T0 anı verilmemiştir. Dolayısıyla tasarım yaparken bunu da göz önünde bulundurmamız gerekir. +
+Komutlarda belirtilen işlemlerin gerçekleşmesi esnasında başka bir komutun atanması durumunda işlem önceliği söz konusudur. Kontrol birimindeki sonlu durum makinesi bir sonraki komuta geçmeden işlemdeki komutun tamamlanmasını sağlamak için saat darbesini kontrol etmektedir. İşlemci bir komutu işlemeye başlarken Run sinyali verilir ve komut tamamlandığında ise Done sinyali verilerek komutun bittiği haber verilir. Table-2’de, Table-1’deki komutların kontrol sinyalleri gösterilmiştir. Burada T0 anında IRin kontrol sinyali olmasına karşın tabloda T0 anı verilmemiştir. Dolayısıyla tasarım yaparken bunu da göz önünde bulundurmamız gerekir. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/document/imgs/oprtns2.PNG[R,right]
 
-Altera lab tasarımında Quartus programı baz alınmıştır. ROM tasarımı için de hazır modül kullanımı tavsiye edilmiştir.
-Tasarımımızda Vivado programı kullanılmış olup, tüm modüller hazır modül kullanılmadan tasarlanmıştır. + 
-
 Yukarıda belirtilen kısımlar 'Processor' modülünün içinde bulunmaktadır. Bunu dışında 'Memory' ve 'Counter' modülleri de ana modülün diğer alt modülleridir. Counter 5 bit bir sayaç olup 32 adet çıkış verisi üretir. Bu veriler 'Memory'deki 32 adet 
-9 bit verinin adreslerine karşılık gelir. Dolayısıyla 'Memory'deki verileri sırasıyla 'Processor' modülüne giriş verisi olarak
+9 bitlik veri gözlerinin adreslerine karşılık gelir. Dolayısıyla 'Memory'deki verileri sırasıyla 'Processor' modülüne giriş verisi olarak
 iletiriz. +
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/images/mainblock.PNG[R]
-
-Altera deneyinde bu üç modül için farklı clock işareti istenmiştir. Bu durum simülasyonda gerçekleme konusunda sorun çıkarmasa da kart üzerinde gerçekleme yapılacağı zaman güç tüketimi konusunda sorun çıkarabilmektedir. Güç tüketiminin %80-85'inin clock üretmek için harcandığı bilinmektedir. +
 
 Tüm modüllerin açıklamaları ve yaptıkları işlemler 'modules' bölümünde işlenmiştir. Tasarımın tek parça halindeki SystemVerilog kodu şu şekildedir: +
 
