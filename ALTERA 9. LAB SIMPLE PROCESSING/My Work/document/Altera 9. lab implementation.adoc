@@ -22,7 +22,7 @@ Komutlarda belirtilen işlemlerin gerçekleşmesi esnasında başka bir komutun 
 
 image::https://github.com/ahmeterdem9603/fpga/blob/master/ALTERA%209.%20LAB%20SIMPLE%20PROCESSING/My%20Work/document/imgs/oprtns2.PNG[R,right]
 
-Yukarıda belirtilen kısımlar 'Processor' modülünün içinde bulunmaktadır. Bunu dışında 'Memory' ve 'Counter' modülleri de ana modülün diğer alt modülleridir. Counter 5 bit bir sayaç olup 32 adet çıkış verisi üretir. Bu veriler 'Memory'deki 32 adet 
+Yukarıda belirtilen kısımlar 'Processor' modülünün içinde bulunmaktadır. Bunun dışında 'Memory' ve 'Counter' modülleri de ana modülün diğer alt modülleridir. Counter 5 bit bir sayaç olup 32 adet çıkış verisi üretir. Bu veriler 'Memory'deki 32 adet 
 9 bitlik veri gözlerinin adreslerine karşılık gelir. Dolayısıyla 'Memory'deki verileri sırasıyla 'Processor' modülüne giriş verisi olarak
 iletiriz. +
 
